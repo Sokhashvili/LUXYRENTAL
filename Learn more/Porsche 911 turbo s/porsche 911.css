@@ -71,6 +71,15 @@ header {
     width: 40px;
 }
 
+.logo {
+    font-size: 4px;
+    margin-right: 50px;
+    color: #ff5f5f;
+    padding-right: 20px;
+}
+.LUXY{
+    width: 100px;
+}
 .FA {
     color: white;
 }

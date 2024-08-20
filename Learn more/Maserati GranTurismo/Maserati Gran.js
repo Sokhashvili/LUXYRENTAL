@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const images = [
-        './Maserati Gran/image1.webp',
-        './Maserati Gran/image2.webp',
-        './Maserati Gran/image3.webp',
-        './Maserati Gran/image4.webp'
+        './Maserati Gran/image1.jpg',
+        './Maserati Gran/image2.jpg',
+        './Maserati Gran/image3.jpg',
+        './Maserati Gran/image4.jpg'
     ];
 
     let currentIndex = 0;
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         updateImage();
     }
 
-    // Adding event listeners to the arrow buttons
+
     document.querySelector('.arrow-left').addEventListener('click', prevImage);
     document.querySelector('.arrow-right').addEventListener('click', nextImage);
 

@@ -1,32 +1,44 @@
 document.addEventListener('DOMContentLoaded', function() {
     const username = localStorage.getItem('username');
     const greeting = document.getElementById('greeting');
-    greeting.textContent = `Hello, ${username}`;
-
-    const rentedCars = JSON.parse(localStorage.getItem('rentedCars')) || [];
+    const signOutBtn = document.getElementById('sign-out-btn');
     const rentedCarsList = document.getElementById('rented-cars-list');
 
-    rentedCars.forEach(car => {
-        const cardDiv = document.createElement('div');
-        cardDiv.className = 'basket-item';
+    if (username) {
+        greeting.textContent = `Hello, ${username}`;
 
-        const imagePath = `./cars/${car.image}`; 
+        const rentedCars = JSON.parse(localStorage.getItem('rentedCars')) || [];
 
-        cardDiv.innerHTML = `
-            <img src="${imagePath}" alt="${car.name}" class="basket-image">
-            <div>
-                <h2>${car.name}</h2>
-                <p>From ${car.startDate} to ${car.endDate}</p>
-            </div>
-            <button class="remove-btn">Remove</button>
-        `;
+        rentedCars.forEach(car => {
+            const carDiv = document.createElement('div');
+            carDiv.className = 'basket-item';
 
-        rentedCarsList.appendChild(cardDiv);
+            const imagePath = './image/luxy luxy.jpg'; 
 
-        cardDiv.querySelector('.remove-btn').addEventListener('click', function() {
-            rentedCarsList.removeChild(cardDiv);
-            const updatedCars = rentedCars.filter(c => c.name !== car.name);
-            localStorage.setItem('rentedCars', JSON.stringify(updatedCars));
+            carDiv.innerHTML = `
+                <img src="${imagePath}" alt="${car.name}" class="basket-image">
+                <div>
+                    <h2>${car.name}</h2>
+                    <p>From ${car.startDate} to ${car.endDate}</p>
+                </div>
+                <button class="remove-btn">Remove</button>
+            `;
+
+            rentedCarsList.appendChild(carDiv);
+
+            carDiv.querySelector('.remove-btn').addEventListener('click', function() {
+                rentedCarsList.removeChild(carDiv);
+                const updatedCars = rentedCars.filter(c => c.name !== car.name);
+                localStorage.setItem('rentedCars', JSON.stringify(updatedCars));
+            });
         });
-    });
+
+        signOutBtn.addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('rentedCars');
+            window.location.href = './index.html';
+        });
+    } else {
+        window.location.href = './index.html';
+    }
 });

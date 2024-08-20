@@ -64,3 +64,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const calendar = flatpickr(".calendar-widget", {
+        inline: true,
+        minDate: "today",
+        mode: "range"
+    });
+
+    document.getElementById('save-button').addEventListener('click', function () {
+        const selectedDates = calendar.selectedDates;
+        if (selectedDates.length === 2) {
+            const startDate = selectedDates[0];
+            const endDate = selectedDates[1];
+
+            const car = {
+                name: "Lamborghini Aventador",
+                startDate: startDate.toLocaleDateString(),
+                endDate: endDate.toLocaleDateString(),
+                image: './Lamborghini Aventador/image1.webp'  
+            };
+
+            let rentedCars = JSON.parse(localStorage.getItem('rentedCars')) || [];
+
+            rentedCars.push(car);
+
+            localStorage.setItem('rentedCars', JSON.stringify(rentedCars));
+
+            alert(`You have rented the car from ${car.startDate} to ${car.endDate}.`);
+
+            window.location.href = '/MyPage.html';
+        } else {
+            alert('Please select both start and end dates.');
+        }
+    });
+});
